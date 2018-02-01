@@ -3,6 +3,7 @@ var player = 0;
 var resolution;
 var xMax, yMax;
 var maxTiles = 0;
+var rolls = 0;
 var players = [];
 var newGameArea, gameArea;
 var playButton, playerCountInput, difficultyB;
@@ -100,7 +101,7 @@ function makeGame(difficulty){
           lsnad = constrain(lsnad, xMax + 1, maxTiles - (xMax * 3 - 1));
         } else if (makeSnadder <= 4){
           if (index < maxTiles - 1){
-            lsnad = floor(index - random(maxTiles - 1));
+            lsnad = floor(index - random(maxTiles - 1, 1));
           }
           lsnad = constrain(lsnad, 0, (maxTiles) - 2);
         }
@@ -162,6 +163,7 @@ function resetGameS(){
     gameOver = false;
     player = 0;
   });
+  rolls = 0;
   resetGame.setStyle("display", "none");
   newGame.setStyle("display", "none");
   rollButton.setStyle("display", "inline");
@@ -185,6 +187,7 @@ function prepareRoll(){
 function playerRoll(){
   diceGif.setStyle("display", "none");
   if (!gameOver){
+    rolls++;
     players[player].rollDice();
   }
   if (players[player].spot >= maxTiles - 1){
